@@ -1,0 +1,27 @@
+@import "../variables";
+
+.file-browser{
+  width: 100%;
+  height: 100vh;
+  background: $dark;
+  header{
+    padding: 0.8rem;
+    text-transform: uppercase;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  button{
+    width: 100%;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    background: rgba(255,255,255,.08);
+    color: white;
+    text-align: left;
+    font-size: 0.9rem;
+    border-bottom: 0.5px solid $primary; 
+    &:hover{
+      background: rgba(255,255,255,.3);
+    }
+  }
+}

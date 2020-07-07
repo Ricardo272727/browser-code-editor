@@ -1,0 +1,18 @@
+@import "../variables";
+
+.text-box{
+  width: 100%;
+  height: 90.94%;
+  background: $primary;
+  .code{
+    width: 100%;
+    height: 100%;
+    background: #272822; 
+    border: none;
+    .CodeMirror{      
+      height: 90vh;
+      overflow: hidden;
+    }
+  }
+
+}

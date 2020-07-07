@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container, Row, Col } from 'reactstrap';
+import Menu from './components/Menu/Menu';
+import FileBrowser from './components/FileBrowser/FileBrowser';
+import FilesOpen from './components/FilesOpen/FilesOpen';
+import TextBox from './components/TextBox/TextBox';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid className="px-0">
+      <Row style={{paddingTop: '2rem'}}>
+        <Col xs={1} className="pr-0">
+          <Menu/>
+        </Col>
+        <Col xs={3} className="px-0">
+          <FileBrowser/>
+        </Col>
+        <Col xs={8} className="pl-0">
+          <FilesOpen/>
+          <TextBox/>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

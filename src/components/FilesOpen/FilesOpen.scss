@@ -1,0 +1,50 @@
+@import "../variables";
+
+
+.files-open{
+  background: $dark;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0.4rem;
+
+  .open-item{
+    background: $primary;
+    max-width: 25%;
+    min-width: 15%;
+    overflow: hidden;
+    border-radius: 7px 7px 0 0;
+    margin-left: 0.3rem;
+    &:first-child{
+      margin-left: 0 !important;
+    }
+    &.active{
+      background: rgba(0,0,0,0.2);
+    }
+    &:hover{
+      background: rgba(255,255,255,0.3);
+    }
+    button{
+      color: white;
+      padding: 0.5rem 0rem;
+      outline: none;
+      text-align: left;
+      font-size: 0.9rem;
+      span{
+        margin-left: 0.4rem;
+      }
+      &:hover{
+        cursor: pointer;
+      }
+    } 
+    .open-file{
+      width: 80%;
+    }
+    .close-file{
+      width: 20%;
+      text-align: center;
+    }
+  }
+  
+}

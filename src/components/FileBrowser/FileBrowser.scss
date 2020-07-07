@@ -24,4 +24,22 @@
       background: rgba(255,255,255,.3);
     }
   }
+  .react-contextmenu{
+    background: $primary;
+    text-align: left;
+    min-width: 10rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 1000;
+  }
+  
+  .react-contextmenu-item{
+    box-shadow: 0.1px 0.1px 1px white;
+    color: white;
+    padding: 0.5rem;
+    &:hover{
+      cursor: pointer;
+      background: rgba(255,255,255,0.2);
+    }
+  }
 }

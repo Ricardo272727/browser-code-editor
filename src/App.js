@@ -8,7 +8,7 @@ import TextBox from './components/TextBox/TextBox';
 function App() {
   return (
     <Container fluid className="px-0">
-      <Row style={{paddingTop: '2rem'}}>
+      <Row style={{paddingTop: '0rem'}}>
         <Col xs={1} className="pr-0">
           <Menu/>
         </Col>

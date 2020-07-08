@@ -1,0 +1,10 @@
+@import "../variables";
+
+.rename-input{
+  width:100%;
+  background: $primary;
+  color: white;
+  border: 1px solid rgba(255,255,255,.8);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+}

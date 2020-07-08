@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./TextBox.scss"; 
 import { useSelector } from 'react-redux';
 import { Controlled as CodeMirror } from 'react-codemirror2';
-import { useDispatch } from 'react-redux';
+import { useFileManager } from '../../hooks/useFileManager.js';
+
 
 require("codemirror/lib/codemirror.css");
 require("codemirror/mode/javascript/javascript");
 require("codemirror/theme/blackboard.css");
 require("codemirror/theme/monokai.css");
+
+
 const TextBox = props => {
  
- const file = useSelector(state => state.currentFile);
- const dispatch = useDispatch();
- const [content, setContent] = useState('');
+ const indexCurrentFile = useSelector(state => state.indexCurrentFile);
+ const files = useSelector(state => state.files);
+ const [file, setFile] = useState({});
+ const fileManager = useFileManager(); 
 
  useEffect(() => {
-   setContent(file.content);
- }, [file]);
+  setFile(files[indexCurrentFile] || {});
+   console.log( files, indexCurrentFile);
+ }, [indexCurrentFile, files]);
 
  return (
   <div className="text-box">
     <CodeMirror
-      value={content}
+      value={file.content}
       options={{
         mode: 'javascript',
         lineNumbers: true,
@@ -29,10 +34,9 @@ const TextBox = props => {
         gutter: true 
       }}
       onBeforeChange={(editor, data, value) => {
-        setContent(value);
+        fileManager.update({...file, content: value});
       }}
       onChange={(editor, data, value) => {
-        console.log(editor, data, value);
       }}
       className="code"
     />

@@ -41,6 +41,7 @@ const RenameInput = props => {
  if(!show) return null;
  return (
   <input
+    className="rename-input"
     ref={inputRef}
     type="text"
     onBlur={save}

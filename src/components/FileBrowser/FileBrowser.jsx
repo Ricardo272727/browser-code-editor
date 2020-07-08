@@ -8,14 +8,14 @@ import RenameInput from '../RenameInput/RenameInput';
 const FileBrowser = props => {
   const files = useSelector(state => state.files);
   const fileManager = useFileManager();
-  const [renameInput, setRenameInput] = useState({ show: false, id: null });
-  const closeRenameInput = () => setRenameInput({ show: false, id: null });
+  const [renameInput, setRenameInput] = useState({ show: false, index: null });
+  const closeRenameInput = () => setRenameInput({ show: false, index: null });
 
   const optionsFactory = (file) => {
     return [
       {
         label: 'Rename',
-        action: () => setRenameInput({ show: true, id: file.id })
+        action: () => setRenameInput({ show: true, index: file.index })
       },
       {
         label: 'Copy',
@@ -24,7 +24,7 @@ const FileBrowser = props => {
     ]
   };
 
-  const getContextId = (file) => file.name + '-' + file.id;
+  const getContextId = (file) => file.name + '-' + file.index;
 
  return (
   <div className="file-browser">
@@ -34,20 +34,22 @@ const FileBrowser = props => {
     <main>
       {
         files.map(file => (
-          <div key={file.id}>
+          <div key={file.index}>
           <ContextMenuTrigger id={getContextId(file)}>
             {
-              renameInput.id !== file.id &&
-              <button className="file">
-               <span>{file.name}</span>
+              renameInput.index !== file.index &&
+              <button
+                className="file"
+                onClick={() => fileManager.open(file)}>
+                 <span>{file.name}</span>
               </button>
             }
             {
             <RenameInput
-              show={renameInput.show && renameInput.id === file.id}
+              show={renameInput.show && renameInput.index === file.index}
               initialName={file.name}
               saveFunc={(newName) => {
-                fileManager.rename(file.id, newName);
+                fileManager.rename(file.index, newName);
                 closeRenameInput();
               }}
             />

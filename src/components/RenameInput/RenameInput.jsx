@@ -29,7 +29,6 @@ const RenameInput = props => {
  };
  
  const onKeyDown = (event) => {
-  console.log('key press', event.keyCode);
   if(event.keyCode === 13){
     save();
     return false;

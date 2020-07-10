@@ -6,25 +6,22 @@ import {
   AiFillSetting
 } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { createFile } from '../../store/actions/file.js';
+import { useFileManager } from '../../hooks/useFileManager.js';
+
 
 const Menu = props => {
 
   const inputRef = useRef();
   const dispatch = useDispatch();
+  const fileManager = useFileManager();
 
   const newFile = () => {
     console.log('New file');
-    dispatch(createFile('Untitle'));   
+    fileManager.create('Untitle');
+    
   };
 
-  const openFile = () => {
-  
-  };
 
-  const openSettings = () => {
-  
-  };
 
  return (
   <ul className="menu">

@@ -4,9 +4,9 @@ import { ACTIONS } from './actions';
 const initialState = {
   
   files: [
-    { index: 0, name: 'Menu.jsx', content: 'import React from \'react\'' } ,
-    { index: 1, name: 'App.js', content: 'console.log(\'app.js\')' },
-    { index: 2, name: 'App.css', content: '.app{ background: red; }' }
+    { index: 0, name: 'Menu.jsx', content: 'import React from \'react\'', modified: false } ,
+    { index: 1, name: 'App.js', content: 'console.log(\'app.js\')', modified: true },
+    { index: 2, name: 'App.css', content: '.app{ background: red; }', modified: true }
   ],
   indexCurrentFile: 2
 };
@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
             ...state.files,
             createFile(state.files.length, action.name)
           ],
-          currentFile: createFile(state.files.length, action.name) 
+          indexCurrentFile: state.files.length
         }
     case ACTIONS.RENAME_FILE:
        return {
@@ -72,7 +72,17 @@ const reducer = (state = initialState, action) => {
           if(file.index === action.file.index){
             return { ...action.file };
           }
-          return file;
+          return { ...file };
+        })
+      }
+    case ACTIONS.SET_FILE_MODIFIED:
+      return {
+        ...state,
+        files: state.files.map(file => {
+          if(file.index === action.index) {
+            return { ...file, modified: action.modified }
+          }
+          return {...file};
         })
       }
        default: 

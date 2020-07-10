@@ -5,7 +5,10 @@ import FileBrowser from './components/FileBrowser/FileBrowser';
 import FilesOpen from './components/FilesOpen/FilesOpen';
 import TextBox from './components/TextBox/TextBox';
 
+
 function App() {
+
+
   return (
     <Container fluid className="px-0">
       <Row style={{paddingTop: '0rem'}}>

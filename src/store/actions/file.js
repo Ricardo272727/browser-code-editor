@@ -36,7 +36,13 @@ export const closeFile = (index) => {
   }
 };
 
-
+export const setFileModified = (index, modified) => {
+  return {
+    type: ACTIONS.SET_FILE_MODIFIED,
+    modified,
+    index
+  }
+}
 
 
 

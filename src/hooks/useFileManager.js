@@ -4,7 +4,8 @@ import {
   renameFile,
   setIndexCurrentFile,
   closeFile,
-  updateFile
+  updateFile,
+  setFileModified
 } from '../store/actions/file.js';
 
 const useFileManager = () => {
@@ -25,7 +26,7 @@ const useFileManager = () => {
 
   const save  = (file) => {
     console.log('implementme!');
-  }
+  };
 
   const update = (file) => {
     dispatch(updateFile(file));
@@ -39,6 +40,10 @@ const useFileManager = () => {
     dispatch(closeFile(index));
   };
 
+  const setModified = (index, modified) => {
+    dispatch(setFileModified(index, modified));
+  };
+
   return {
     create,
     rename,
@@ -46,7 +51,8 @@ const useFileManager = () => {
     open,
     close,
     update,
-    save
+    save,
+    setModified
   }
 };
 

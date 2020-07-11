@@ -18,17 +18,17 @@ require("codemirror/theme/monokai.css");
 const TextBox = props => {
  
  const indexCurrentFile = useSelector(state => state.indexCurrentFile);
- const files = useSelector(state => state.files);
+ const openFiles = useSelector(state => state.openFiles);
  const [file, setFile] = useState({});
  const [mode, setMode] = useState(modes.js);
  const fileManager = useFileManager();
 
  useEffect(() => {
-  setFile(files[indexCurrentFile] || {});
- }, [indexCurrentFile, files]);
+  setFile(openFiles[indexCurrentFile] || {});
+ }, [indexCurrentFile, openFiles]);
 
  useEffect(() => {
-  selectMode(files[indexCurrentFile] ? files[indexCurrentFile].name : '');
+  selectMode(openFiles[indexCurrentFile] ? openFiles[indexCurrentFile].name : '');
  }, [indexCurrentFile]);
 
   const selectMode = (filename) => {

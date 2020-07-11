@@ -5,16 +5,17 @@ import { MdClose } from 'react-icons/md';
 import { useFileManager } from '../../hooks/useFileManager.js';
 import { FaCircle } from 'react-icons/fa';
 import { useKeyboardEvent } from '../../hooks/useKeyboardEvent.js';
+import { Spinner } from 'reactstrap';
 
 const FilesOpen = props => {
   
-  const files = useSelector(state => state.files);
+  const openFiles = useSelector(state => state.openFiles);
   const indexCurrentFile = useSelector(state => state.indexCurrentFile);
-  const currentFile = files[indexCurrentFile] || {};
+  const currentFile = openFiles[indexCurrentFile] || {};
   const fileManager = useFileManager();
   const [onSave, setOnSave] = useState(
     () => () => {
-      fileManager.setModified(indexCurrentFile, false)
+      fileManager.save(openFiles[indexCurrentFile])
     });
 
   useKeyboardEvent({
@@ -26,15 +27,15 @@ const FilesOpen = props => {
   useEffect(() => {
     setOnSave(
       () => () => {
-        fileManager.setModified(indexCurrentFile, false);
+        fileManager.save(openFiles[indexCurrentFile]);
       }
     );
-  }, [indexCurrentFile]);
+  }, [indexCurrentFile, openFiles]);
   
  return (
   <div className="files-open">
     {
-      files.map(file => (
+      openFiles.map(file => (
         <div
           className={"open-item" + (currentFile.index === file.index ? ' active' : '' )}
           key={file.index}>
@@ -48,7 +49,13 @@ const FilesOpen = props => {
           <button
             className="close-file"
             onClick={() => fileManager.close(file.index)}>
-            { !file.modified  ? <MdClose/> : <FaCircle className="modified"/> }
+            { !file.modified  ?
+              <MdClose/> : (
+                file.saving ?
+                  <Spinner color="light" size="sm"/>
+                :
+                <FaCircle className="modified"/>) 
+            }            
           </button>
         </div>
       ))

@@ -6,7 +6,7 @@ import { ContextMenu, ContextMenuTrigger, MenuItem } from 'react-contextmenu';
 import RenameInput from '../RenameInput/RenameInput';
 
 const FileBrowser = props => {
-  const files = useSelector(state => state.files);
+  const openFiles = useSelector(state => state.openFiles);
   const fileManager = useFileManager();
   const [renameInput, setRenameInput] = useState({ show: false, index: null });
   const closeRenameInput = () => setRenameInput({ show: false, index: null });
@@ -29,11 +29,11 @@ const FileBrowser = props => {
  return (
   <div className="file-browser">
     <header>
-      <span>Open files</span>
+      <span>Open openFiles</span>
     </header>
     <main>
       {
-        files.map(file => (
+        openFiles.map(file => (
           <div key={file.index}>
           <ContextMenuTrigger id={getContextId(file)}>
             {

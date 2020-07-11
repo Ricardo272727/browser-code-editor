@@ -29,6 +29,28 @@ export const updateFile = (file) => {
   }
 };  
 
+
+export const setFileSaving = (index, saving) => {
+  return {
+    type: ACTIONS.SET_FILE_SAVING,
+    index,
+    saving
+  }
+};
+
+export const updateFileInServer = (file) => {
+  return (dispatch) => {
+    dispatch(setFileSaving(file.index, true));
+    setTimeout(() => {
+      console.log('updating file in server', file);
+      dispatch(updateFile(file));
+      dispatch(setFileSaving(file.index, false));
+      dispatch(setFileModified(file.index, false));
+    }, 1000);
+  };
+};
+
+
 export const closeFile = (index) => {
   return {
     type: ACTIONS.CLOSE_FILE,

@@ -1,97 +1,10 @@
-import { createStore } from 'redux';
-import { ACTIONS } from './actions';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducer.js';
+import mockdata from '../mocks/mockdata.js';
+console.log('mockdata', mockdata);
 
-const initialState = {
-  
-  files: [
-    { index: 0, name: 'Menu.jsx', content: 'import React from \'react\'', modified: false } ,
-    { index: 1, name: 'App.js', content: 'console.log(\'app.js\')', modified: true },
-    { index: 2, name: 'App.css', content: '.app{ background: red; }', modified: true }
-  ],
-  indexCurrentFile: 2
-};
-
-const createFile = (index, name) => {
-  return {
-    index,
-    name,
-    content: ''
-  }
-};
-
-const deleteFile = (index, files) => {
-  let newFiles = files.slice();
-  let i;
-  for(i = 0; i < newFiles.length; i+=1){
-    if(newFiles[i].index === index){
-      break;
-    }
-  }
-  if(i !== newFiles.length){
-    newFiles.splice(i, 1);
-  }
-  return newFiles;
-};
-
-
-const reducer = (state = initialState, action) => {
-  switch(action.type){
-    case ACTIONS.CREATE_FILE:
-       return {
-          ...state,
-          files: [
-            ...state.files,
-            createFile(state.files.length, action.name)
-          ],
-          indexCurrentFile: state.files.length
-        }
-    case ACTIONS.RENAME_FILE:
-       return {
-          ...state,
-          files: state.files.map(file => {
-            if(file.index === action.index){
-              return {...file, name: action.newName };
-            }
-            return {...file};
-          })
-       }
-    case ACTIONS.SET_INDEX_CURRENT_FILE:
-      return {
-        ...state,
-        indexCurrentFile: action.index
-      }
-    case ACTIONS.CLOSE_FILE:
-      return {
-        ...state,
-        files: deleteFile(action.index, state.files)
-      }
-    case ACTIONS.UPDATE_FILE:
-      return {
-        ...state,
-        files: state.files.map(file => {
-          if(file.index === action.file.index){
-            return { ...action.file };
-          }
-          return { ...file };
-        })
-      }
-    case ACTIONS.SET_FILE_MODIFIED:
-      return {
-        ...state,
-        files: state.files.map(file => {
-          if(file.index === action.index) {
-            return { ...file, modified: action.modified }
-          }
-          return {...file};
-        })
-      }
-       default: 
-      return state;
-  }
-};
-
-
-export default createStore(reducer);
+export default createStore(reducer, mockdata, applyMiddleware(thunk));
 
 
 

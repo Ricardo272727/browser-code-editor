@@ -5,6 +5,7 @@ import {
   setIndexCurrentFile,
   closeFile,
   updateFile,
+  updateFileInServer,
   setFileModified
 } from '../store/actions/file.js';
 
@@ -25,7 +26,7 @@ const useFileManager = () => {
   };
 
   const save  = (file) => {
-    console.log('implementme!');
+    dispatch(updateFileInServer(file));
   };
 
   const update = (file) => {

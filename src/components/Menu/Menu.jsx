@@ -13,10 +13,8 @@ import { useSelector } from 'react-redux';
 const Menu = props => {
 
   const inputRef = useRef();
-  const dispatch = useDispatch();
-  const openFiles = useSelector(state => state.openFiles);
-  const indexCurrentFile = useSelector(state => state.indexCurrentFile);
   const fileManager = useFileManager();
+  const currentFile = fileManager.getCurrentFile();
 
   const newFile = () => {
     fileManager.create('Untitle');
@@ -27,7 +25,7 @@ const Menu = props => {
   };
 
   const save = () => {
-    fileManager.save(openFiles[indexCurrentFile]);
+    fileManager.save(currentFile);
   };
 
   const settings = () => {

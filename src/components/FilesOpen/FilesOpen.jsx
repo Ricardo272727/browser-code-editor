@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useCallback } from 'react'; 
 import "./FilesOpen.scss"; 
 import { useSelector } from 'react-redux';
 import { MdClose } from 'react-icons/md';
@@ -9,14 +9,13 @@ import { Spinner } from 'reactstrap';
 
 const FilesOpen = props => {
   
-  const openFiles = useSelector(state => state.openFiles);
-  const indexCurrentFile = useSelector(state => state.indexCurrentFile);
-  const currentFile = openFiles[indexCurrentFile] || {};
   const fileManager = useFileManager();
-  const [onSave, setOnSave] = useState(
-    () => () => {
-      fileManager.save(openFiles[indexCurrentFile])
-    });
+  const openFiles = fileManager.getOpenFiles();
+  const currentFile = fileManager.getCurrentFile();
+
+  const onSave = useCallback(() => {
+      fileManager.save(currentFile);
+    }, [currentFile]);
 
   useKeyboardEvent({
     fn: onSave,
@@ -24,14 +23,6 @@ const FilesOpen = props => {
     key: 's'
   });
  
-  useEffect(() => {
-    setOnSave(
-      () => () => {
-        fileManager.save(openFiles[indexCurrentFile]);
-      }
-    );
-  }, [indexCurrentFile, openFiles]);
-  
  return (
   <div className="files-open">
     {
@@ -41,7 +32,7 @@ const FilesOpen = props => {
           key={file.index}>
           <button
             className="open-file"
-            onClick={() => fileManager.open(file) }>
+            onClick={() => fileManager.open(file.index) }>
             <span>
               {file.name}
             </span>
@@ -49,7 +40,7 @@ const FilesOpen = props => {
           <button
             className="close-file"
             onClick={() => fileManager.close(file.index)}>
-            { !file.modified  ?
+            { file.saved  ?
               <MdClose/> : (
                 file.saving ?
                   <Spinner color="light" size="sm"/>

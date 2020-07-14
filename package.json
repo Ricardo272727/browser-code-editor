@@ -9,15 +9,19 @@
     "bootstrap": "^4.5.0",
     "codemirror": "^5.55.0",
     "emoji-picker-react": "^3.2.1",
+    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-codemirror2": "^7.2.1",
+    "react-contextmenu": "^2.14.0",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
+    "react-keyed-file-browser": "^1.9.0",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "reactstrap": "^8.5.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2"
   }
 }

@@ -17,19 +17,13 @@ require("codemirror/theme/monokai.css");
 
 const TextBox = props => {
  
- const indexCurrentFile = useSelector(state => state.indexCurrentFile);
- const openFiles = useSelector(state => state.openFiles);
- const [file, setFile] = useState({});
  const [mode, setMode] = useState(modes.js);
  const fileManager = useFileManager();
+ const file = fileManager.getCurrentFile();
 
  useEffect(() => {
-  setFile(openFiles[indexCurrentFile] || {});
- }, [indexCurrentFile, openFiles]);
-
- useEffect(() => {
-  selectMode(openFiles[indexCurrentFile] ? openFiles[indexCurrentFile].name : '');
- }, [indexCurrentFile]);
+  selectMode(file ? file.name : '');
+ }, [file]);
 
   const selectMode = (filename) => {
    for(let i = 0; i < modes.length; i+=1){
@@ -51,7 +45,7 @@ const TextBox = props => {
         gutter: true 
       }}
       onBeforeChange={(editor, data, value) => {
-        fileManager.update({...file, content: value, modified: true});
+        fileManager.update({...file, content: value, saved: false});
       }}
       onChange={(editor, data, value) => {
       }}

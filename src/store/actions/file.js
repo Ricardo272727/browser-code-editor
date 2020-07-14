@@ -7,6 +7,13 @@ export const createFile = (name) => {
   }
 };
 
+export const openFile = (index) => {
+  return {
+    type: ACTIONS.OPEN_FILE,
+    index
+  }
+};
+
 export const renameFile = (index, newName) => {
   return {
     type: ACTIONS.RENAME_FILE,
@@ -22,6 +29,7 @@ export const setIndexCurrentFile = (index) => {
   }
 };
 
+
 export const updateFile = (file) => {
   return {
     type: ACTIONS.UPDATE_FILE,
@@ -29,6 +37,13 @@ export const updateFile = (file) => {
   }
 };  
 
+export const setFiles = (files) => {
+  console.log('seting files', files);
+  return {
+    type: ACTIONS.SET_FILES,
+    files
+  }
+};
 
 export const setFileSaving = (index, saving) => {
   return {
@@ -45,7 +60,7 @@ export const updateFileInServer = (file) => {
       console.log('updating file in server', file);
       dispatch(updateFile(file));
       dispatch(setFileSaving(file.index, false));
-      dispatch(setFileModified(file.index, false));
+      dispatch(setFileSaved(file.index, true));
     }, 1000);
   };
 };
@@ -58,10 +73,10 @@ export const closeFile = (index) => {
   }
 };
 
-export const setFileModified = (index, modified) => {
+export const setFileSaved = (index, saved) => {
   return {
-    type: ACTIONS.SET_FILE_MODIFIED,
-    modified,
+    type: ACTIONS.SET_FILE_SAVED,
+    saved,
     index
   }
 }

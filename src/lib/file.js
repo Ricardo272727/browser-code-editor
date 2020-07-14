@@ -1,9 +1,10 @@
+import Moment from 'moment';
 
 // pure functions to use in reducer
 
 export const processFiles = (files) => {
-  return files.map(file =>  {
-    return {...file, modified: false, saving: false }
+  return files.map((file, i) =>  {
+    return {...file, saved: true, saving: false, open: i%2 === 0 }
   })
 };
 
@@ -11,21 +12,9 @@ export const createFile = (index, name) => {
   return {
     index,
     name,
-    content: ''
+    content: '',
+    key: name,
+    modified: +Moment(),
+    size: 0
   }
 };
-
-export const deleteFile = (index, files) => {
-  let newFiles = files.slice();
-  let i;
-  for(i = 0; i < newFiles.length; i+=1){
-    if(newFiles[i].index === index){
-      break;
-    }
-  }
-  if(i !== newFiles.length){
-    newFiles.splice(i, 1);
-  }
-  return newFiles;
-};
-

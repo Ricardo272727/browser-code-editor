@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { useFileManager } from '../../hooks/useFileManager.js';
 import { ContextMenu, ContextMenuTrigger, MenuItem } from 'react-contextmenu';
 import RenameInput from '../RenameInput/RenameInput';
+import NestedFileBrowser from '../NestedFileBrowser/NestedFileBrowser';
 
 const FileBrowser = props => {
-  const openFiles = useSelector(state => state.openFiles);
   const fileManager = useFileManager();
   const [renameInput, setRenameInput] = useState({ show: false, index: null });
   const closeRenameInput = () => setRenameInput({ show: false, index: null });
@@ -29,9 +29,21 @@ const FileBrowser = props => {
  return (
   <div className="file-browser">
     <header>
-      <span>Open openFiles</span>
+      <span>Upload files</span>
     </header>
-    <main>
+    <section className="server-files">
+      <NestedFileBrowser/>
+    </section>
+    <header>
+      <span>Open files</span>
+    </header>
+
+
+   </div>
+ );
+} 
+   { /*
+    <main className="open-files">
       {
         openFiles.map(file => (
           <div key={file.index}>
@@ -68,8 +80,6 @@ const FileBrowser = props => {
         ))
       }
     </main>
-   </div>
- );
-} 
+      */}
 
 export default FileBrowser;

@@ -8,13 +8,13 @@ export const processFiles = (files) => {
   })
 };
 
-export const createFile = (index, name) => {
+export const createFile = (index, name, content, size) => {
   return {
     index,
     name,
-    content: '',
+    content,
+    size,
     key: name,
-    modified: +Moment(),
-    size: 0
+    modified: +Moment() 
   }
 };

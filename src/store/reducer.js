@@ -14,7 +14,6 @@ const reducer = (state = initialState, action) => {
   switch(action.type){
       
     case ACTIONS.SET_FILES:
-      console.log(action.files);
       return {
         ...state,
         files: action.files
@@ -32,7 +31,7 @@ const reducer = (state = initialState, action) => {
           files: [
             ...state.files,
             processFiles([
-              createFile(state.files.length, action.name)
+              createFile(state.files.length, action.name, action.content, action.size)
             ])[0]
           ],
           indexCurrentFile: state.files.length

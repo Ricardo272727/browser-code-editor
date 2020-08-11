@@ -32,8 +32,10 @@ const NestedFileBrowser = props => {
         FolderOpen: <AiFillFolderOpen/>,
         Delete: <AiOutlineDelete/>,
         Loading: <Spinner size="sm" color="light"/>
-      }}
-      onSelectFile={(file) => fileManager.open(file.index)}
+      }} 
+      onSelectFile={(file) => fileManager.open(file.index )}
+      onSelectFolder={(folder) => fileManager.setCurrentFolder(folder)}
+      onFolderOpen={(d) => console.log('folder open app', d)}
       onCreateFolder={fileManager.handleCreateFolder}
       onCreateFiles={fileManager.handleCreateFiles}
       onMoveFolder={fileManager.handleRenameFolder}

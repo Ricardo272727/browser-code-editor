@@ -14,10 +14,7 @@ function App() {
         <Col xs={1} className="pr-0">
           <Menu/>
         </Col>
-        <Col xs={3} className="px-0">
-          <FileBrowser/>
-        </Col>
-        <Col xs={8} className="pl-0">
+        <Col xs={11} className="pl-0">
           <FilesOpen/>
           <TextBox/>
         </Col>

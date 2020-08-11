@@ -4,15 +4,14 @@ import {
   AiFillFileAdd,
   AiFillFolderOpen,
   AiFillSetting,
-  AiFillSave
+  AiFillSave,
+  AiOutlineDownload
 } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
 import { useFileManager } from '../../hooks/useFileManager.js';
-import { useSelector } from 'react-redux';
 
 const Menu = props => {
 
-  const inputRef = useRef();
+  const fileInputRef = useRef();
   const fileManager = useFileManager();
   const currentFile = fileManager.getCurrentFile();
 
@@ -21,15 +20,37 @@ const Menu = props => {
   };
 
   const openFile = () => {
+    if(fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const readFiles = () => {
+    const fileList = fileInputRef.current.files;
+    const readers = [];
     
+    if(fileList){
+      for(let i = 0; i < fileList.length; i++){
+        readers[i] = new FileReader();
+        readers[i].onload = ({ target: { result }}) => {
+          fileManager.create(fileList[i].name, result, fileList[i].size);
+        }
+        console.log(fileList[i]);
+        readers[i].readAsText(fileList[i]);
+      }
+    }
   };
 
   const save = () => {
-    fileManager.save(currentFile);
+    fileManager.update(currentFile);
   };
+  
+  const download = () => {
+    fileManager.download(currentFile);
+  }
 
   const settings = () => {
-    
+
   };
 
  return (
@@ -42,6 +63,13 @@ const Menu = props => {
     <li>
       <button className="open-file" onClick={openFile}>
         <AiFillFolderOpen/>
+        <input 
+          type="file" 
+          multiple={true}
+          className="d-none"
+          ref={fileInputRef}
+          onChange={readFiles}
+        />
       </button>
     </li>
     <li>
@@ -50,11 +78,15 @@ const Menu = props => {
       </button>
     </li>
     <li>
+      <button onClick={download} className="download-file">
+        <AiOutlineDownload />
+      </button>
+    </li>
+    <li>
       <button className="settings" onClick={settings}>
         <AiFillSetting/>
       </button>
     </li>
-    <input type="file" className="d-none" ref={inputRef} />
   </ul>
  );
 } 

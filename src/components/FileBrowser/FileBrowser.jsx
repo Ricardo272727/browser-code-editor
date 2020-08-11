@@ -34,11 +34,6 @@ const FileBrowser = props => {
     <section className="server-files">
       <NestedFileBrowser/>
     </section>
-    <header>
-      <span>Open files</span>
-    </header>
-
-
    </div>
  );
 } 

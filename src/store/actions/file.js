@@ -1,9 +1,11 @@
 import { ACTIONS } from './index.js';
 
-export const createFile = (name) => {
+export const createFile = (name, content, size) => {
   return {
     type: ACTIONS.CREATE_FILE,
-    name
+    name,
+    content,
+    size
   }
 };
 
@@ -51,18 +53,6 @@ export const setFileSaving = (index, saving) => {
     index,
     saving
   }
-};
-
-export const updateFileInServer = (file) => {
-  return (dispatch) => {
-    dispatch(setFileSaving(file.index, true));
-    setTimeout(() => {
-      console.log('updating file in server', file);
-      dispatch(updateFile(file));
-      dispatch(setFileSaving(file.index, false));
-      dispatch(setFileSaved(file.index, true));
-    }, 1000);
-  };
 };
 
 

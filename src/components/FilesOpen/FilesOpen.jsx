@@ -14,7 +14,7 @@ const FilesOpen = props => {
   const currentFile = fileManager.getCurrentFile();
 
   const onSave = useCallback(() => {
-      fileManager.save(currentFile);
+      fileManager.update(currentFile);
     }, [currentFile]);
 
   useKeyboardEvent({
@@ -23,8 +23,9 @@ const FilesOpen = props => {
     key: 's'
   });
  
+ 
  return (
-  <div className="files-open">
+  <div className="files-open pl-1">
     {
       openFiles.map(file => (
         <div

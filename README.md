@@ -1,14 +1,14 @@
 
-## Code editor in reactJs
+## Code editor in React JS
 
 # In progress!
 
 
 Open the application typing in your terminal:
-
+```
 $ npm install
 $ npm start
-
+```
 Go to localhost:3000 in your browser and you will can see this:
 
 ![Screenshot](/screenshot.png)
